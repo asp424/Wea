@@ -19,17 +19,7 @@ import com.example.weatherable.utilites.isOnline
 @RequiresApi(Build.VERSION_CODES.M)
 @Composable
 fun Loading(context: Context){
-Column(
-Modifier
-.wrapContentSize()
-.fillMaxWidth(),
-horizontalAlignment = Alignment.CenterHorizontally,
-verticalArrangement = Arrangement.Top
-) {
-    Card(
-        border = BorderStroke(2.dp, Color.Black),
-        shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth()
-    ) {
+    DetailCard{
         Column(
             Modifier.wrapContentSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -52,5 +42,4 @@ verticalArrangement = Arrangement.Top
             }
         }
     }
-}
 }
