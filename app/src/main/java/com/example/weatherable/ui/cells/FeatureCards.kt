@@ -14,7 +14,7 @@ import com.example.weatherable.R
 import org.json.JSONObject
 
 @Composable
-fun YandexF() {
+fun YandexF(put: JSONObject) {
     Card(
         modifier = Modifier.padding(bottom = 10.dp),
         elevation = 10.dp,
@@ -136,7 +136,7 @@ fun GidroMetF(dataMyCity: JSONObject) {
 }
 
 @Composable
-fun GisMeteoF() {
+fun GisMeteoF(put: JSONObject) {
     Card(
         elevation = 10.dp,
         backgroundColor = colorResource(id = R.color.light)
