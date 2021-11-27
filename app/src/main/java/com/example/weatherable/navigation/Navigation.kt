@@ -1,4 +1,4 @@
-package com.example.weatherable.ui.cells
+package com.example.weatherable.navigation
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -9,11 +9,9 @@ import androidx.compose.material.icons.filled.WbSunny
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.example.weatherable.ui.screens.FeatureScreen
 import com.example.weatherable.ui.screens.WeatherScreen
 import com.example.weatherable.ui.viewmodel.MainViewModel
 
@@ -34,7 +32,7 @@ fun NavController(viewModel: MainViewModel) {
                                     popUpTo(screen)
                                 }
                             },
-                            label = { CellWaterName(string = screen, color = Color.White, paddingStart = 0.dp, paddingTop = 10.dp) },
+                            label = { Text(text = screen)},
                             icon = {
                                 Icon(Icons.Default.WbSunny, "ass", tint = Color.White)
                             })

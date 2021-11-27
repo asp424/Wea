@@ -24,12 +24,12 @@ import org.json.JSONObject
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun FeatureScreen(viewModel: MainViewModel) {
-    CellBackgroundImage()
+    BackgroundImage()
     var visible by remember {
         mutableStateOf(false)
     }
     val context = LocalContext.current as MainActivity
-    CellBackgroundImage()
+    BackgroundImage()
     val values by remember(viewModel) {
         viewModel.internetValues
     }.collectAsState()
@@ -45,7 +45,7 @@ fun FeatureScreen(viewModel: MainViewModel) {
                 ) {
                     Visibility(visible = visible) {
                         Card(backgroundColor = Color.Yellow) {
-                            CellHeader(
+                            Header(
                                 string = "Отсутствует интернет",
                                 color = Color.Red,
                                 paddingTop = 8.dp, paddingStart = 8.dp,
@@ -92,7 +92,7 @@ fun FeatureScreen(viewModel: MainViewModel) {
             ) {
                 if (isOnline(context)) {
                     Card(backgroundColor = Color.Black) {
-                        CellHeader(
+                        Header(
                             string = "Загрузка...",
                             paddingTop = 8.dp, paddingStart = 8.dp,
                             paddingBottom = 8.dp, paddingEnd = 8.dp
@@ -101,7 +101,7 @@ fun FeatureScreen(viewModel: MainViewModel) {
                 } else {
                     visible = true
                     Card(backgroundColor = Color.Yellow) {
-                        CellHeader(
+                        Header(
                             string = "Отсутствует интернет",
                             color = Color.Red,
                             paddingTop = 8.dp, paddingStart = 8.dp,

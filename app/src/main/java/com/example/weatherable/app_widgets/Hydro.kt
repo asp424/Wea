@@ -10,6 +10,7 @@ import android.util.Log
 import android.widget.RemoteViews
 import com.bumptech.glide.Glide
 import com.example.weatherable.R
+import com.example.weatherable.data.internet.jsoup.getOnSitesTemps
 import com.example.weatherable.utilites.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers

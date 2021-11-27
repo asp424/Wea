@@ -28,7 +28,7 @@ fun Yandex(dataMyCity: JSONObject) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CellValue(string = dataMyCity.getString("yan_temp"))
+                Value(string = dataMyCity.getString("yan_temp"))
                 Image(
                     painter = rememberImagePainter(
                         when (dataMyCity.getString("yan_rain_now")) {
@@ -61,7 +61,7 @@ fun GidroMet(dataMyCity: JSONObject) {
             modifier = Modifier.padding(start = 6.dp), horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically
         ) {
-            CellValue(string = dataMyCity.getString("hydro_temp"))
+            Value(string = dataMyCity.getString("hydro_temp"))
             Image(
                 painter = rememberImagePainter(
                     when (dataMyCity.getString("hydro_now_rain")) {
@@ -102,8 +102,8 @@ fun GisMeteo(dataMyCity: JSONObject) {
                 horizontalArrangement = Arrangement.Center,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                CellValue(string = dataMyCity.getString("gis_temp"))
-                CellValue(string = dataMyCity.getString("gis_rain_now"))
+                Value(string = dataMyCity.getString("gis_temp"))
+                Value(string = dataMyCity.getString("gis_rain_now"))
                 Image(
                     painter = rememberImagePainter(
                         when (dataMyCity.getString("gis_rain_now")) {

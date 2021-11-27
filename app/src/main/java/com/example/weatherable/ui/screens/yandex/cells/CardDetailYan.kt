@@ -31,22 +31,17 @@ fun CardDetailYan(time: String, rain: String, index: Int, temp: String){
             modifier = Modifier.width(64.dp)
 
         ) {
-            Text(
-                    text = time,
+            Text(text = time,
                     textAlign = TextAlign.Center,
-                    fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp)
-                )
-
+                    fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
             Image(
                 painter = rememberImagePainter(
                     if (index == 1 || index == 2) getIconDayYan(rain)
-                    else getIconNightYan(rain)
-                ),
+                    else getIconNightYan(rain)),
                 contentDescription = null,
                 modifier = Modifier.size(38.dp)
             )
-            Text(
-                    text = temp,
+            Text(text = temp,
                     textAlign = TextAlign.Center,
                     fontStyle = FontStyle.Italic
                 )

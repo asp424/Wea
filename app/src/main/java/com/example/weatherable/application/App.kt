@@ -7,7 +7,6 @@ import com.example.weatherable.di.dagger_2.appcomponent.DaggerAppComponent
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 class App: Application() {
-
     @ExperimentalCoroutinesApi
     private var _appComponent: AppComponent? = null
     @ExperimentalCoroutinesApi

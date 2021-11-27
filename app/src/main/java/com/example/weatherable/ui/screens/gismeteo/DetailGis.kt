@@ -2,10 +2,7 @@ package com.example.weatherable.ui.screens.gismeteo
 
 import android.os.Build
 import androidx.annotation.RequiresApi
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import com.example.weatherable.activity.DetailGisActivity
@@ -23,10 +20,13 @@ fun DetailGis(viewModel: DetailGisViewModel) {
     val values by remember(viewModel) { viewModel.internetValues }.collectAsState()
     val listTod = remember { mutableListOf<String>() }
     val listTom = remember { mutableListOf<String>() }
+
     val context = LocalContext.current as DetailGisActivity
+    val lifeCycle = LocalLifecycleOwner.current.lifecycle
+
     when (values) {
         is InternetResponse.OnSuccess -> {
-            DetailCard{
+            DetailCard {
                 (values as InternetResponse.OnSuccess).dataValues.apply {
                     listTod.addToList(getString("gis_temp_tod"))
                     listTom.addToList(getString("gis_temp_tom"))
@@ -42,7 +42,10 @@ fun DetailGis(viewModel: DetailGisViewModel) {
         else -> {
         }
     }
-    LocalLifecycleOwner.current.lifecycle.addObserver(viewModel)
+    LaunchedEffect(lifeCycle) { lifeCycle.addObserver(viewModel) }
+    DisposableEffect(lifeCycle) {
+        onDispose { lifeCycle.removeObserver(viewModel) }
+    }
 }
 
 

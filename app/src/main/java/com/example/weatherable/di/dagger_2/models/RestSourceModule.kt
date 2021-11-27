@@ -11,7 +11,7 @@ import javax.inject.Singleton
 class RestSourceModule {
     @Provides
     @Singleton
-    fun  restSource(): RestSource {
+    fun restSource(): RestSource {
         return RestSource()
     }
 }

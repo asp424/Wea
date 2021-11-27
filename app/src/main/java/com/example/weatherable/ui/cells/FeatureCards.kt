@@ -2,22 +2,19 @@ package com.example.weatherable.ui.cells
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
-import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.weatherable.R
 import org.json.JSONObject
 
 @Composable
-fun YandexF(dataMyCity: JSONObject) {
+fun YandexF() {
     Card(
         modifier = Modifier.padding(bottom = 10.dp),
         elevation = 10.dp,
@@ -26,7 +23,7 @@ fun YandexF(dataMyCity: JSONObject) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CellHeader(stringResource(id = R.string.yandex_name))
+            Header(stringResource(id = R.string.yandex_name))
             Row(modifier = Modifier.padding(8.dp)) {
                 Column {
 
@@ -54,7 +51,7 @@ fun GidroMetF(dataMyCity: JSONObject) {
         ) {
             Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(end = 16.dp, start = 6.dp)) {
-                CellValue(string = dataMyCity.getString("hydro_today_temp"))
+                Value(string = dataMyCity.getString("hydro_today_temp"))
                 Image(
                     painter = rememberImagePainter(
                         when (dataMyCity.getString("hydro_today_rain")) {
@@ -82,7 +79,7 @@ fun GidroMetF(dataMyCity: JSONObject) {
             Row(verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier.padding(end = 16.dp)) {
 
-                CellValue(string = dataMyCity.getString("hydro_tom_temp_d"))
+                Value(string = dataMyCity.getString("hydro_tom_temp_d"))
                         Image(
                             painter = rememberImagePainter(
                                 when (dataMyCity.getString("hydro_tom_rain_d")) {
@@ -110,7 +107,7 @@ fun GidroMetF(dataMyCity: JSONObject) {
                 Row(verticalAlignment = Alignment.CenterVertically,
                     modifier = Modifier.padding(end = 6.dp)
                     ) {
-                        CellValue(string = dataMyCity.getString("hydro_tom_temp_n"))
+                        Value(string = dataMyCity.getString("hydro_tom_temp_n"))
                         Image(
                             painter = rememberImagePainter(
                                 when (dataMyCity.getString("hydro_tom_rain_n")) {
@@ -139,7 +136,7 @@ fun GidroMetF(dataMyCity: JSONObject) {
 }
 
 @Composable
-fun GisMeteoF(dataMyCity: JSONObject) {
+fun GisMeteoF() {
     Card(
         elevation = 10.dp,
         backgroundColor = colorResource(id = R.color.light)
@@ -147,7 +144,7 @@ fun GisMeteoF(dataMyCity: JSONObject) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            CellHeader(stringResource(id = R.string.gismeteo_name))
+            Header(stringResource(id = R.string.gismeteo_name))
             Row(modifier = Modifier.padding(8.dp)) {
                 Column {
 

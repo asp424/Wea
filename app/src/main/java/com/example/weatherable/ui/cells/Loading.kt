@@ -16,29 +16,41 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.example.weatherable.utilites.isOnline
+
 @RequiresApi(Build.VERSION_CODES.M)
 @Composable
-fun Loading(context: Context){
-    DetailCard{
-        Column(
-            Modifier.wrapContentSize(),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.Top
+fun Loading(context: Context) {
+    Column(
+        Modifier
+            .wrapContentSize()
+            .fillMaxWidth(),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Top
+    ) {
+        Card(
+            border = BorderStroke(2.dp, Color.Black),
+            shape = RoundedCornerShape(16.dp), modifier = Modifier.fillMaxWidth()
         ) {
-            if (isOnline(context)) {
-                CellHeader(
-                    string = "Загрузка...",
-                    paddingTop = 8.dp, paddingStart = 8.dp,
-                    paddingBottom = 8.dp, paddingEnd = 8.dp,
-                    color = Color.Black
-                )
-            } else {
-                CellHeader(
-                    string = "Отсутствует интернет",
-                    color = Color.Red,
-                    paddingTop = 8.dp, paddingStart = 8.dp,
-                    paddingBottom = 8.dp, paddingEnd = 8.dp
-                )
+            Column(
+                Modifier.wrapContentSize(),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.Top
+            ) {
+                if (isOnline(context)) {
+                    Header(
+                        string = "Загрузка...",
+                        paddingTop = 8.dp, paddingStart = 8.dp,
+                        paddingBottom = 8.dp, paddingEnd = 8.dp,
+                        color = Color.Black
+                    )
+                } else {
+                    Header(
+                        string = "Отсутствует интернет",
+                        color = Color.Red,
+                        paddingTop = 8.dp, paddingStart = 8.dp,
+                        paddingBottom = 8.dp, paddingEnd = 8.dp
+                    )
+                }
             }
         }
     }

@@ -12,9 +12,11 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import androidx.compose.ui.unit.dp
+import com.example.weatherable.R
 import com.example.weatherable.activity.MainActivity
 import com.example.weatherable.data.view_states.InternetResponse
 import com.example.weatherable.ui.cells.*
+import com.example.weatherable.ui.cells.Logo
 import com.example.weatherable.ui.viewmodel.MainViewModel
 import com.example.weatherable.utilites.isOnline
 import org.json.JSONObject
@@ -26,11 +28,9 @@ import org.json.JSONObject
 fun WeatherScreen(
     viewModel: MainViewModel
 ) {
-    var visible by remember {
-        mutableStateOf(false)
-    }
+    var visible by remember { mutableStateOf(false) }
     val context = LocalContext.current as MainActivity
-    CellBackgroundImage()
+  //  CellBackgroundImage()
     val values by remember(viewModel) {
         viewModel.internetValues
     }.collectAsState()
@@ -46,7 +46,7 @@ fun WeatherScreen(
                 ) {
                     Visibility(visible = visible) {
                         Card(backgroundColor = Color.Yellow) {
-                            CellHeader(string = "Отсутствует интернет",
+                            Header(string = "Отсутствует интернет",
                                 color = Color.Red,
                                 paddingTop = 8.dp, paddingStart = 8.dp,
                                 paddingBottom = 8.dp, paddingEnd = 8.dp)
@@ -58,16 +58,19 @@ fun WeatherScreen(
                             .padding(bottom = 65.dp, top = 10.dp),
                        horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center
                     ) {
+                        Logo(path = R.drawable.yan_logo)
                         Yandex(
                             JSONObject()
                                 .put("yan_temp", getString("yan_temp"))
                                 .put("yan_rain_now", getString("yan_rain_now"))
                         )
+                        Logo(path = R.drawable.logo_g)
                         GidroMet(
                             JSONObject()
                                 .put("hydro_temp", getString("hydro_temp"))
                                 .put("hydro_now_rain", getString("hydro_now_rain"))
                         )
+                        Logo(path = R.drawable.gismeteo_logo)
                         GisMeteo(
                             JSONObject()
                                 .put("gis_temp", getString("gis_temp"))
@@ -84,7 +87,7 @@ fun WeatherScreen(
             ) {
                 if (isOnline(context)) {
                     Card(backgroundColor = Color.Black) {
-                        CellHeader(string = "Загрузка...",
+                        Header(string = "Загрузка...",
                             paddingTop = 8.dp, paddingStart = 8.dp,
                             paddingBottom = 8.dp, paddingEnd = 8.dp)
                     }
@@ -92,15 +95,13 @@ fun WeatherScreen(
                 {
                     visible = true
                     Card(backgroundColor = Color.Yellow) {
-                        CellHeader(string = "Отсутствует интернет",
+                        Header(string = "Отсутствует интернет",
                             color = Color.Red,
                             paddingTop = 8.dp, paddingStart = 8.dp,
                             paddingBottom = 8.dp, paddingEnd = 8.dp)
                     }
                 }
-
             }
-
         }
     }
     LocalLifecycleOwner.current.lifecycle.addObserver(viewModel)

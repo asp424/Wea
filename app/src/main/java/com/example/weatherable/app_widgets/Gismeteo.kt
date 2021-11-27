@@ -10,6 +10,7 @@ import android.content.Intent
 import android.widget.RemoteViews
 import com.example.weatherable.R
 import com.example.weatherable.activity.DetailGisActivity
+import com.example.weatherable.data.internet.jsoup.getOnSitesTemps
 import com.example.weatherable.utilites.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -74,7 +75,7 @@ internal suspend fun updateGisAppWidget(
 }
 
 
-@SuppressLint("SimpleDateFormat")
+@SuppressLint("SimpleDateFormat", "UnspecifiedImmutableFlag")
 suspend fun updateGisViews(context: Context?, function: (RemoteViews) -> Unit) {
     val views = RemoteViews(context?.packageName, R.layout.gismeteo)
     val nowTime = SimpleDateFormat("H:mm").format(Calendar.getInstance().time)
@@ -82,7 +83,7 @@ suspend fun updateGisViews(context: Context?, function: (RemoteViews) -> Unit) {
     val nowTimeInt = nowTime.rep
     val sunUp = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0)!!.rep
     val sunDown = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 1)!!.rep
-    val value = getOnSitesTemps(GIS_URL, "div", flag = 3)?.sA?.sB!!
+    val value = getOnSitesTemps(GIS_URL, GIS_DIV_TAG, flag = 3)?.sA?.sB!!
     views.apply {
         setOnClickPendingIntent(R.id.image_now_gis,
             PendingIntent.getActivity(context, 0,
@@ -90,8 +91,7 @@ suspend fun updateGisViews(context: Context?, function: (RemoteViews) -> Unit) {
                     .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0))
         setOnClickPendingIntent(R.id.image_gis,
             getPendingSelfIntent(context, "update", Gismeteo::class.java))
-        setTextViewText(R.id.gis_text, getOnSitesTemps(GIS_URL_TOD, GIS_TEMP_TOD)
-            ?.replace(",", ".")?.replace("+", "") + " °C")
+        setTextViewText(R.id.gis_text, getOnSitesTemps(GIS_URL_TOD, GIS_TEMP_TOD)?.repPlus + " °C")
     }
     if (nowTimeInt in sunUp..sunDown || nowTimeInt in sunDown..sunUp
     ) {

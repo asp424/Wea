@@ -17,14 +17,6 @@ import org.jsoup.Jsoup
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
-
-fun deleteSymbols(string: String?): String? {
-    return string?.replace(
-        Regex("[+]"),
-        ""
-    )?.replace(Regex("[,]"), ".")
-}
-
 @RequiresApi(Build.VERSION_CODES.M)
 fun isOnline(context: Context): Boolean {
     val connectivityManager =
@@ -57,27 +49,6 @@ fun getPendingSelfIntent(
     intent.action = action
     return PendingIntent.getBroadcast(context, 0, intent, 0)
 }
-
-
-
-fun getView(context: Context?, options: Bundle?): RemoteViews {
-    val minWidth: Int
-   // val minHeight: Int
-    if (context!!.resources.configuration.orientation ==
-        ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
-        || context.resources.configuration.orientation ==
-        ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
-    ) {
-        minWidth = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH) ?: 0
-       // minHeight = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT) ?: 0
-    } else {
-        minWidth = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH) ?: 0
-      //  minHeight = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT) ?: 0
-    }
-    return if (minWidth >= 240) RemoteViews(context.packageName, R.layout.yandex)
-    else RemoteViews(context.packageName, R.layout.hydro)
-}
-
 
 val String.sA: String
     get() = this.substringAfter("data-text=\"")

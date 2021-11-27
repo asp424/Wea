@@ -1,4 +1,4 @@
-package com.example.weatherable.ui.screens.gismeteo.cells
+package com.example.weatherable.ui.cells
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement

@@ -12,6 +12,7 @@ import android.widget.RemoteViews
 import com.example.weatherable.R
 import com.example.weatherable.activity.DetailGisActivity
 import com.example.weatherable.activity.DetailYanActivity
+import com.example.weatherable.data.internet.jsoup.getOnSitesTemps
 import com.example.weatherable.utilites.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -109,7 +110,7 @@ suspend fun updateYanViews(context: Context?, function: (RemoteViews) -> Unit) {
                   Intent(context, DetailYanActivity::class.java)
                       .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0))
           setTextViewText(R.id.yan_text, getOnSitesTemps(YAN_URL,
-              YAN_TEMP, 1)?.replace("+", "") + " °C")
+              YAN_TEMP, 1)?.repPlus + " °C")
           setTextViewText(R.id.yan_time, nowTime)
       }
     if (nowTimeInt in sunUp..sunDown || nowTimeInt in sunDown..sunUp
