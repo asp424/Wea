@@ -1,5 +1,6 @@
 package com.example.weatherable.utilites
 
+import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.content.Context
@@ -46,6 +47,7 @@ fun isOnline(context: Context): Boolean {
     return false
 }
 
+@SuppressLint("UnspecifiedImmutableFlag")
 fun getPendingSelfIntent(
     context: Context?,
     action: String?,
@@ -56,49 +58,21 @@ fun getPendingSelfIntent(
     return PendingIntent.getBroadcast(context, 0, intent, 0)
 }
 
-suspend fun getOnSitesTemps(
-    url: String,
-    classOrTag: String,
-    index: Int = 0,
-    flag: Int = 0
-): String? = suspendCoroutine { continuation ->
-    runCatching {
-        when (flag) {
-            0 -> Jsoup.connect(url).get()
-                .getElementsByClass(classOrTag)[index]?.text()
-            1 -> Jsoup.connect(url).get()
-                .getElementsByTag(classOrTag)[index]?.text()
-            2 -> Jsoup.connect(url).get()
-                .getElementsByTag(classOrTag)[index]
-            3 -> Jsoup.connect(url).get()
-                .getElementsByTag(classOrTag)
-            4 -> Jsoup.connect(url).get()
-                .getElementsByClass(classOrTag).text()
-            5 -> Jsoup.connect(url).get()
-                .getElementsByClass(classOrTag)
-            else -> {
-            }
-        }
-    }.onSuccess {
-        continuation.resume(it.toString())
-    }.onFailure {
-        continuation.resume("Err")
-    }
-}
+
 
 fun getView(context: Context?, options: Bundle?): RemoteViews {
     val minWidth: Int
-    val minHeight: Int
+   // val minHeight: Int
     if (context!!.resources.configuration.orientation ==
         ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
         || context.resources.configuration.orientation ==
         ActivityInfo.SCREEN_ORIENTATION_REVERSE_PORTRAIT
     ) {
         minWidth = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_WIDTH) ?: 0
-        minHeight = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT) ?: 0
+       // minHeight = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_HEIGHT) ?: 0
     } else {
         minWidth = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MAX_WIDTH) ?: 0
-        minHeight = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT) ?: 0
+      //  minHeight = options?.getInt(AppWidgetManager.OPTION_APPWIDGET_MIN_HEIGHT) ?: 0
     }
     return if (minWidth >= 240) RemoteViews(context.packageName, R.layout.yandex)
     else RemoteViews(context.packageName, R.layout.hydro)

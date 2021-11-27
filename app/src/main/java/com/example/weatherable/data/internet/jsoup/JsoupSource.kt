@@ -6,6 +6,7 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import org.json.JSONObject
+import org.jsoup.Jsoup
 import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
@@ -65,5 +66,34 @@ class JsoupSource {
 
     private suspend fun valueT(i: Int) = getOnSitesTemps(YAN_URL_DETAILS, YAN_TOD_DETAIL_TEMP, i)
     private suspend fun valueR(i: Int) = getOnSitesTemps(YAN_URL_DETAILS, YAN_TOD_DETAIL_RAIN, i)
+    private suspend fun getOnSitesTemps(
+        url: String,
+        classOrTag: String,
+        index: Int = 0,
+        flag: Int = 0
+    ): String? = suspendCoroutine { continuation ->
+        runCatching {
+            when (flag) {
+                0 -> Jsoup.connect(url).get()
+                    .getElementsByClass(classOrTag)[index]?.text()
+                1 -> Jsoup.connect(url).get()
+                    .getElementsByTag(classOrTag)[index]?.text()
+                2 -> Jsoup.connect(url).get()
+                    .getElementsByTag(classOrTag)[index]
+                3 -> Jsoup.connect(url).get()
+                    .getElementsByTag(classOrTag)
+                4 -> Jsoup.connect(url).get()
+                    .getElementsByClass(classOrTag).text()
+                5 -> Jsoup.connect(url).get()
+                    .getElementsByClass(classOrTag)
+                else -> {
+                }
+            }
+        }.onSuccess {
+            continuation.resume(it.toString())
+        }.onFailure {
+            continuation.resume("Err")
+        }
+    }
 }
 
