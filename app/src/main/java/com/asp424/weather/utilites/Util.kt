@@ -140,7 +140,8 @@ fun getIconNightGis(value: String) = when (value) {
 }
 
 fun getIconNightYan(value: String) = when (value) {
-    "Небольшой дождь" -> R.drawable.gis_n
+    "Дождь" -> R.drawable.gis_f_n
+    "Небольшой дождь" -> R.drawable.gis_h_n
     "Дождь со снегом" -> R.drawable.gis_e
     "Ясно" -> R.drawable.gis_b_n
     "Небольшой снег" -> R.drawable.gis_a
@@ -151,8 +152,9 @@ fun getIconNightYan(value: String) = when (value) {
 }
 
 fun getIconDayYan(value: String) = when (value) {
+    "Дождь" -> R.drawable.gis_j
     "Дождь со снегом" -> R.drawable.gis_e
-    "Небольшой дождь" -> R.drawable.gis_n
+    "Небольшой дождь" -> R.drawable.gis_k
     "Ясно" -> R.drawable.gis_b
     "Небольшой снег" -> R.drawable.gis_a
     "Пасмурно" -> R.drawable.gis_i

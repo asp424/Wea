@@ -1,4 +1,4 @@
-package com.asp424.weather.ui.screens.widgets.gismeteo
+package com.asp424.weather.ui.widgets.gismeteo
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -9,7 +9,7 @@ import com.asp424.weather.activity.DetailGisActivity
 import com.asp424.weather.data.view_states.InternetResponse
 import com.asp424.weather.ui.cells.DetailCard
 import com.asp424.weather.ui.cells.Loading
-import com.asp424.weather.ui.screens.widgets.gismeteo.cells.ColumnDetail
+import com.asp424.weather.ui.widgets.gismeteo.cells.ColumnDetail
 import com.asp424.weather.ui.viewmodel.DetailGisViewModel
 import com.asp424.weather.utilites.addItem
 import com.asp424.weather.utilites.addToList

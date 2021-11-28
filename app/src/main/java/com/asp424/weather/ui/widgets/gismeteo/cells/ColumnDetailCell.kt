@@ -1,4 +1,4 @@
-package com.asp424.weather.ui.screens.widgets.gismeteo.cells
+package com.asp424.weather.ui.widgets.gismeteo.cells
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope

@@ -1,4 +1,4 @@
-package com.asp424.weather.ui.screens.widgets.yandex
+package com.asp424.weather.ui.widgets.yandex
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -10,7 +10,7 @@ import com.asp424.weather.activity.DetailYanActivity
 import com.asp424.weather.data.view_states.InternetResponse
 import com.asp424.weather.ui.cells.DetailCard
 import com.asp424.weather.ui.cells.Loading
-import com.asp424.weather.ui.screens.widgets.yandex.cells.ColumnDetailYan
+import com.asp424.weather.ui.widgets.yandex.cells.ColumnDetailYan
 import com.asp424.weather.ui.viewmodel.DetailYanViewModel
 
 

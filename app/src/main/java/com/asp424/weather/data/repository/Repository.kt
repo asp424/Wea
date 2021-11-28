@@ -12,9 +12,6 @@ constructor(
     private val jsoupSource: JsoupSource,
     private val restSource: RestSource
 ) {
-    suspend fun getJsoupData(): Flow<InternetResponse> = flow {
-        emit(jsoupSource.getCityValues())
-    }
     suspend fun getGisData(): Flow<InternetResponse> = flow {
         emit(jsoupSource.getGisData())
     }

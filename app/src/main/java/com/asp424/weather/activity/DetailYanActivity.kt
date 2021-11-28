@@ -8,7 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.asp424.weather.application.appComponent
-import com.asp424.weather.ui.screens.widgets.yandex.DetailYan
+import com.asp424.weather.ui.widgets.yandex.DetailYan
 import com.asp424.weather.ui.viewmodel.DetailYanViewModel
 import dagger.Lazy
 import kotlinx.coroutines.ExperimentalCoroutinesApi

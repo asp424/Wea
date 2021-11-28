@@ -8,7 +8,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.asp424.weather.application.appComponent
-import com.asp424.weather.ui.screens.widgets.gismeteo.DetailGis
+import com.asp424.weather.ui.widgets.gismeteo.DetailGis
 import com.asp424.weather.ui.viewmodel.DetailGisViewModel
 import dagger.Lazy
 import kotlinx.coroutines.ExperimentalCoroutinesApi

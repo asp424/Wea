@@ -10,12 +10,15 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class DetailGisViewModel @Inject constructor(private val repository: Repository) : ViewModel(),
-    LifecycleObserver {
+    DefaultLifecycleObserver {
     private val _internetValues: MutableStateFlow<InternetResponse?> =
         MutableStateFlow(InternetResponse.Loading)
     val internetValues = _internetValues.asStateFlow()
 
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
+        getGisData()
+    }
     fun getGisData() {
         viewModelScope.launch {
             repository.getGisData().collect {

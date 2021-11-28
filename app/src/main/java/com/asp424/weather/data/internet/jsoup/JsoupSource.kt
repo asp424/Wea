@@ -11,23 +11,6 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.suspendCoroutine
 
 class JsoupSource {
-    suspend fun getCityValues(): InternetResponse =
-        suspendCoroutine { continuation ->
-            CoroutineScope(Dispatchers.Default).launch {
-                continuation.resume(
-                    InternetResponse.OnSuccess(
-                        JSONObject()
-                            .put("hydro_temp", getOnSitesTemps(GID_URL, TAG, 10, 1))
-                            .put("hydro_now_rain", getOnSitesTemps(GID_URL, TAG, 15, 1))
-                            .put("gis_temp", getOnSitesTemps(GIS_URL_TOD, GIS_TEMP_TOD) + " °C")
-                            .put("gis_rain_now", getOnSitesTemps(GIS_URL, "div", flag = 3)?.sA?.sB)
-                            .put("yan_temp", getOnSitesTemps(YAN_URL, YAN_TEMP, 1) + " °C")
-                            .put("yan_rain_now", getOnSitesTemps(YAN_URL, YAN_RAIN, 0))
-                    )
-                )
-            }
-        }
-
     suspend fun getGisData(): InternetResponse =
         suspendCoroutine { continuation ->
             CoroutineScope(Dispatchers.Default).launch {

@@ -9,11 +9,14 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class DetailYanViewModel @Inject constructor(private val repository: Repository) : ViewModel(), LifecycleObserver {
+class DetailYanViewModel @Inject constructor(private val repository: Repository) : ViewModel(), DefaultLifecycleObserver {
     private val _internetValues: MutableStateFlow<InternetResponse?> =
             MutableStateFlow(InternetResponse.Loading)
         val internetValues = _internetValues.asStateFlow()
-    @OnLifecycleEvent(Lifecycle.Event.ON_RESUME)
+    override fun onResume(owner: LifecycleOwner) {
+        super.onResume(owner)
+        getYanData()
+    }
         fun getYanData() {
             viewModelScope.launch {
                 repository.getYanData().collect {

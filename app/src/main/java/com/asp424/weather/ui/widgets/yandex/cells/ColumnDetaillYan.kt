@@ -1,4 +1,4 @@
-package com.asp424.weather.ui.screens.widgets.yandex.cells
+package com.asp424.weather.ui.widgets.yandex.cells
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable
