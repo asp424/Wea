@@ -1,4 +1,4 @@
-package com.example.weatherable.ui.screens.gismeteo
+package com.example.weatherable.ui.screens.widgets.gismeteo
 
 import android.os.Build
 import androidx.annotation.RequiresApi
@@ -9,7 +9,7 @@ import com.example.weatherable.activity.DetailGisActivity
 import com.example.weatherable.data.view_states.InternetResponse
 import com.example.weatherable.ui.cells.DetailCard
 import com.example.weatherable.ui.cells.Loading
-import com.example.weatherable.ui.screens.gismeteo.cells.ColumnDetail
+import com.example.weatherable.ui.screens.widgets.gismeteo.cells.ColumnDetail
 import com.example.weatherable.ui.viewmodel.DetailGisViewModel
 import com.example.weatherable.utilites.addItem
 import com.example.weatherable.utilites.addToList
@@ -20,10 +20,8 @@ fun DetailGis(viewModel: DetailGisViewModel) {
     val values by remember(viewModel) { viewModel.internetValues }.collectAsState()
     val listTod = remember { mutableListOf<String>() }
     val listTom = remember { mutableListOf<String>() }
-
     val context = LocalContext.current as DetailGisActivity
     val lifeCycle = LocalLifecycleOwner.current.lifecycle
-
     when (values) {
         is InternetResponse.OnSuccess -> {
             DetailCard {

@@ -1,4 +1,4 @@
-package com.example.weatherable.ui.screens.yandex.cells
+package com.example.weatherable.ui.screens.widgets.yandex.cells
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.runtime.Composable

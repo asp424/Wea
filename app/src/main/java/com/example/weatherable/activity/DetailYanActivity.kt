@@ -8,7 +8,7 @@ import androidx.activity.compose.setContent
 import androidx.annotation.RequiresApi
 import androidx.lifecycle.ViewModelProvider
 import com.example.weatherable.application.appComponent
-import com.example.weatherable.ui.screens.yandex.DetailYan
+import com.example.weatherable.ui.screens.widgets.yandex.DetailYan
 import com.example.weatherable.ui.viewmodel.DetailYanViewModel
 import dagger.Lazy
 import kotlinx.coroutines.ExperimentalCoroutinesApi

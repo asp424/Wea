@@ -1,4 +1,4 @@
-package com.example.weatherable.ui.screens.yandex
+package com.example.weatherable.ui.screens.widgets.yandex
 
 import android.annotation.SuppressLint
 import android.os.Build
@@ -10,7 +10,7 @@ import com.example.weatherable.activity.DetailYanActivity
 import com.example.weatherable.data.view_states.InternetResponse
 import com.example.weatherable.ui.cells.DetailCard
 import com.example.weatherable.ui.cells.Loading
-import com.example.weatherable.ui.screens.yandex.cells.ColumnDetailYan
+import com.example.weatherable.ui.screens.widgets.yandex.cells.ColumnDetailYan
 import com.example.weatherable.ui.viewmodel.DetailYanViewModel
 
 

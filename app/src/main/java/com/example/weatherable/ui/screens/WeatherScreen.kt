@@ -30,7 +30,7 @@ fun WeatherScreen(
 ) {
     var visible by remember { mutableStateOf(false) }
     val context = LocalContext.current as MainActivity
-  //  CellBackgroundImage()
+  BackgroundImage()
     val values by remember(viewModel) {
         viewModel.internetValues
     }.collectAsState()

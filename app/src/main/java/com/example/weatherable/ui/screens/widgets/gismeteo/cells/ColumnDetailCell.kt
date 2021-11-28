@@ -1,4 +1,4 @@
-package com.example.weatherable.ui.screens.gismeteo.cells
+package com.example.weatherable.ui.screens.widgets.gismeteo.cells
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope

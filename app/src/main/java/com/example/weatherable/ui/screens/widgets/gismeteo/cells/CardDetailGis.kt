@@ -1,4 +1,4 @@
-package com.example.weatherable.ui.screens.yandex.cells
+package com.example.weatherable.ui.screens.widgets.gismeteo.cells
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -15,12 +15,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
 import com.example.weatherable.utilites.getIconDayGis
-import com.example.weatherable.utilites.getIconDayYan
 import com.example.weatherable.utilites.getIconNightGis
-import com.example.weatherable.utilites.getIconNightYan
+import com.example.weatherable.utilites.repPlus
 
 @Composable
-fun CardDetailYan(time: String, rain: String, index: Int, temp: String){
+fun CardDetailGis(i: Int, image: String, item: String, indexes: IntRange, hour: Int) {
+    val min = "00"
+    val listHour = listOf("2", "5", "8", "11", "14", "17", "20", "23")
     Card(
         modifier = Modifier.padding(3.dp),
         border = BorderStroke(1.dp, Color.Black)
@@ -31,20 +32,36 @@ fun CardDetailYan(time: String, rain: String, index: Int, temp: String){
             modifier = Modifier.width(64.dp)
 
         ) {
-            Text(text = time,
+            Row(
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.Top
+            ) {
+                Text(
+                    text = listHour[hour],
                     textAlign = TextAlign.Center,
-                    fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
+                    fontSize = 12.sp,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
+                Text(text = min, fontSize = 8.sp,
+                    modifier = Modifier.padding(top = 4.dp))
+            }
             Image(
                 painter = rememberImagePainter(
-                    if (index == 1 || index == 2) getIconDayYan(rain)
-                    else getIconNightYan(rain)),
+                    if (i in indexes) getIconNightGis(image)
+                    else getIconDayGis(image)
+                ),
                 contentDescription = null,
                 modifier = Modifier.size(38.dp)
             )
-            Text(text = temp,
+            Row(horizontalArrangement = Arrangement.Center) {
+                Text(
+                    text = item.repPlus,
                     textAlign = TextAlign.Center,
-                    fontStyle = FontStyle.Italic
+                    fontStyle = FontStyle.Italic,
+                    modifier = Modifier.padding(bottom = 4.dp)
                 )
+                Text(text = " °C")
+            }
         }
     }
 }
