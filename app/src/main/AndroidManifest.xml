@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.weatherable">
+    package="com.asp424.weather">
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
@@ -9,7 +9,7 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
-        android:name=".application.App"
+        android:name="com.asp424.weather.application.App"
         android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="Челябинск"
@@ -17,14 +17,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Weatherable">
         <activity
-            android:name=".activity.DetailYanActivity"
+            android:name="com.asp424.weather.activity.DetailYanActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleTask"
             android:taskAffinity=""
             android:theme="@style/Theme.AppCompat.Dialog"/>
         <activity
-            android:name=".activity.DetailGisActivity"
+            android:name="com.asp424.weather.activity.DetailGisActivity"
             android:excludeFromRecents="true"
             android:exported="false"
             android:launchMode="singleTask"
@@ -32,7 +32,7 @@
             android:theme="@style/Theme.AppCompat.Dialog" />
 
         <receiver
-            android:name=".app_widgets.Gismeteo"
+            android:name="com.asp424.weather.app_widgets.Gismeteo"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -43,7 +43,7 @@
                 android:resource="@xml/gismeteo_info" />
         </receiver>
         <receiver
-            android:name=".app_widgets.Yandex"
+            android:name="com.asp424.weather.app_widgets.Yandex"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -54,7 +54,7 @@
                 android:resource="@xml/yandex_info" />
         </receiver>
         <receiver
-            android:name=".app_widgets.Hydro"
+            android:name="com.asp424.weather.app_widgets.Hydro"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
@@ -66,7 +66,7 @@
         </receiver>
 
         <activity
-            android:name=".activity.MainActivity"
+            android:name="com.asp424.weather.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="locked">
             <intent-filter>

@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.weatherable"
+        applicationId "com.asp424.weather"
         maxSdkVersion 30
         minSdkVersion 24
         targetSdkVersion 31
