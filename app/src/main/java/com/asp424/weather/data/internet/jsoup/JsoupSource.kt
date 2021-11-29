@@ -1,5 +1,6 @@
 package com.asp424.weather.data.internet.jsoup
 
+import android.util.Log
 import com.asp424.weather.data.view_states.InternetResponse
 import com.asp424.weather.utilites.*
 import kotlinx.coroutines.CoroutineScope
@@ -31,6 +32,10 @@ class JsoupSource {
     suspend fun getYanData(): InternetResponse =
         suspendCoroutine { continuation ->
             CoroutineScope(Dispatchers.Default).launch {
+                Log.d("My", getOnSitesTemps(
+                    MSN_DET_URL,
+                    "root", 0, flag = 6).toString())
+                Log.d("My", "d".toString())
                 continuation.resume(
                     InternetResponse.OnSuccess(
                         JSONObject().apply {
@@ -46,10 +51,21 @@ class JsoupSource {
                 )
             }
         }
-
     private suspend fun valueT(i: Int) = getOnSitesTemps(YAN_URL_DETAILS, YAN_TOD_DETAIL_TEMP, i)
     private suspend fun valueR(i: Int) = getOnSitesTemps(YAN_URL_DETAILS, YAN_TOD_DETAIL_RAIN, i)
 
+    suspend fun getMsnData(): InternetResponse =
+        suspendCoroutine { continuation ->
+            CoroutineScope(Dispatchers.Default).launch {
+                continuation.resume(
+                    InternetResponse.OnSuccess(
+                        JSONObject()
+                            .put("msn_now", getOnSitesTemps(MSN_DET_URL, MSN_NOW_ROW, flag = 5))
+
+                    )
+                )
+            }
+        }
 }
 
 suspend fun getOnSitesTemps(
@@ -62,16 +78,22 @@ suspend fun getOnSitesTemps(
         when (flag) {
             0 -> Jsoup.connect(url).get()
                 .getElementsByClass(classOrTag)[index]?.text()
+
             1 -> Jsoup.connect(url).get()
                 .getElementsByTag(classOrTag)[index]?.text()
+
             2 -> Jsoup.connect(url).get()
                 .getElementsByTag(classOrTag)[index]
+
             3 -> Jsoup.connect(url).get()
                 .getElementsByTag(classOrTag)
+
             4 -> Jsoup.connect(url).get()
                 .getElementsByClass(classOrTag).text()
+
             5 -> Jsoup.connect(url).get()
                 .getElementsByClass(classOrTag)
+            6 -> Jsoup.connect(url).get().getElementsByClass("temp-DS-EntryPoint1-1 tempSelected-DS-EntryPoint1-1")
             else -> {
             }
         }

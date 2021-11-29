@@ -1,6 +1,9 @@
 package com.asp424.weather.ui.viewmodel
 
-import androidx.lifecycle.*
+import androidx.lifecycle.DefaultLifecycleObserver
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.asp424.weather.data.repository.Repository
 import com.asp424.weather.data.view_states.InternetResponse
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -19,11 +22,11 @@ class DetailGisViewModel @Inject constructor(private val repository: Repository)
         super.onResume(owner)
         getGisData()
     }
-    fun getGisData() {
+    private fun getGisData() {
         viewModelScope.launch {
             repository.getGisData().collect {
                 _internetValues.value = it
             }
         }
     }
-}
+    }
