@@ -65,11 +65,7 @@
             android:name="com.asp424.weather.activity.MainActivity"
             android:exported="true"
             android:screenOrientation="locked">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
     </application>
 

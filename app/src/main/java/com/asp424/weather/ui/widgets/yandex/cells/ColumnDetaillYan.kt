@@ -36,7 +36,7 @@ fun ColumnDetailYan(
                         index = i, temp = getString("yan_temp_tom$i")
                     )}
             }
-            Logo(R.drawable.yan_logo)
+            Logo(R.drawable.yan_logo, 1)
         }
     }
 }
