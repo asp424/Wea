@@ -1,11 +1,14 @@
 package com.asp424.weather.ui.widgets.gismeteo.cells
 
+import android.util.Log
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -14,16 +17,27 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
+import com.asp424.weather.ui.cells.Visibility
 import com.asp424.weather.utilites.getIconDayGis
 import com.asp424.weather.utilites.getIconNightGis
 import com.asp424.weather.utilites.repPlus
 
+@OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun CardDetailGis(i: Int, image: String, item: String, indexes: IntRange, hour: Int) {
+fun CardDetailGis(
+    i: Int,
+    image: String,
+    item: String,
+    indexes: IntRange,
+    hour: Int, onClick: (String) -> Unit) {
     val min = "00"
     val listHour = listOf("2", "5", "8", "11", "14", "17", "20", "23")
     Card(
-        modifier = Modifier.padding(3.dp),
+        modifier = Modifier
+            .padding(3.dp)
+            .clickable {
+                onClick(image)
+            },
         border = BorderStroke(1.dp, Color.Black)
     ) {
         Column(
@@ -42,8 +56,10 @@ fun CardDetailGis(i: Int, image: String, item: String, indexes: IntRange, hour: 
                     fontSize = 12.sp,
                     modifier = Modifier.padding(top = 4.dp)
                 )
-                Text(text = min, fontSize = 8.sp,
-                    modifier = Modifier.padding(top = 4.dp))
+                Text(
+                    text = min, fontSize = 8.sp,
+                    modifier = Modifier.padding(top = 4.dp)
+                )
             }
             Image(
                 painter = rememberImagePainter(

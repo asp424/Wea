@@ -2,6 +2,7 @@ package com.asp424.weather.ui.widgets.yandex.cells
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
@@ -18,9 +19,11 @@ import com.asp424.weather.utilites.getIconDayYan
 import com.asp424.weather.utilites.getIconNightYan
 
 @Composable
-fun CardDetailYan(time: String, rain: String, index: Int, temp: String){
+fun CardDetailYan(time: String, rain: String, index: Int, temp: String, onClick: (String) -> Unit){
     Card(
-        modifier = Modifier.padding(3.dp),
+        modifier = Modifier.padding(3.dp).clickable {
+            onClick(rain)
+        },
         border = BorderStroke(1.dp, Color.Black)
     ) {
         Column(
@@ -34,7 +37,7 @@ fun CardDetailYan(time: String, rain: String, index: Int, temp: String){
                     fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
             Image(
                 painter = rememberImagePainter(
-                    if (index == 1 || index == 2) getIconDayYan(rain)
+                    if (index == 0 || index == 1) getIconDayYan(rain)
                     else getIconNightYan(rain)),
                 contentDescription = null,
                 modifier = Modifier.size(38.dp)

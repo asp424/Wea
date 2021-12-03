@@ -57,8 +57,8 @@ class Gismeteo : AppWidgetProvider() {
             }
             CoroutineScope(Dispatchers.IO).launch {
                 updateYanViews(context, appWidgetManager) {
-                    appWidgetManager.updateAppWidget(ComponentName(context!!,
-                        Yandex::class.java), VIEWS_YAN)
+                    appWidgetManager
+                        .updateAppWidget(getStateScreen(context!!, "yan"), VIEWS_YAN)
                 }
             }
             CoroutineScope(Dispatchers.IO).launch {
