@@ -13,11 +13,14 @@ const val MSN_DET_URL = "https://www.msn.com/ru-ru/weather/today/%D0%A7%D0%B5%D0
 const val MSN_DET_URL_MAP = "https://www.msn.com/ru-ru/weather/maps?lat=55.1601&lon=61.3936&weadegreetype=C&weaext0=%7B%22l%22%3A%22%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA%22%2C%22r%22%3A%22%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C%22%2C%22c%22%3A%22%D0%A0%D0%BE%D1%81%D1%81%D0%B8%D1%8F%22%2C%22i%22%3A%22RU%22%2C%22t%22%3A102%2C%22g%22%3A%22ru-ru%22%7D&type=temperature&city=%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA%2C+%D0%A7%D0%B5%D0%BB%D1%8F%D0%B1%D0%B8%D0%BD%D1%81%D0%BA%D0%B0%D1%8F+%D0%BE%D0%B1%D0%BB%D0%B0%D1%81%D1%82%D1%8C"
 const val MSN_NOW_ROW = "summaryLineGroupCompact-DS-EntryPoint1-1"
 
+const val GIS_SUN_UP = "nowastro__item nowastro__item_sunrise"
+const val GIS_SUN_DOWN = "nowastro__item nowastro__item_sunset"
 
+const val GIS_ICON_LIST = "widget__row widget__row_table widget__row_icon"
 const val GIS_TEMP_TOD = "unit unit_temperature_c"
-const val GIS_SUN_UP = "nowastro__time"
+
 const val GIS_DIV_TAG = "div"
-const val GIS_ICON_LIST = "widget__item"
+
 const val YAN_TEMP = "temp__value"
 const val YAN_TOD_DETAIL_TEMP = "weather-table__temp"
 const val YAN_TOD_DETAIL_RAIN = "weather-table__body-cell weather-table__body-cell_type_condition"

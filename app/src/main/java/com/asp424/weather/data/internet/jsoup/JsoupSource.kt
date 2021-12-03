@@ -21,9 +21,10 @@ class JsoupSource {
                             .put("gis_icon_tod", getOnSitesTemps(GIS_URL_TOD, GIS_ICON_LIST, 0, 5))
                             .put("gis_temp_tom", getOnSitesTemps(GIS_URL_TOM, GIS_TEMP_TOD, 0, 4))
                             .put("gis_icon_tom", getOnSitesTemps(GIS_URL_TOM, GIS_ICON_LIST, 0, 5))
-                            .put("gis_sun_up", getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0))
-                            .put("gis_sun_down", getOnSitesTemps(GIS_URL, GIS_SUN_UP, 1))
+                            .put("gis_sun_up", getOnSitesTemps(GIS_URL, GIS_SUN_UP))
+                            .put("gis_sun_down", getOnSitesTemps(GIS_URL, GIS_SUN_DOWN)
                     )
+                )
                 )
             }
         }

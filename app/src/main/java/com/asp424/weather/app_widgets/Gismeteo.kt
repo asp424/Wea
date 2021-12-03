@@ -7,6 +7,7 @@ import android.appwidget.AppWidgetProvider
 import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
+import android.util.Log
 import android.widget.RemoteViews
 import com.asp424.weather.R
 import com.asp424.weather.activity.DetailGisActivity
@@ -28,7 +29,7 @@ class Gismeteo : AppWidgetProvider() {
         appWidgetIds: IntArray
     ) {
         for (appWidgetId in appWidgetIds) {
-            CoroutineScope(Dispatchers.Default).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 updateGisAppWidget(
                     context,
                     appWidgetManager,
@@ -37,24 +38,32 @@ class Gismeteo : AppWidgetProvider() {
             }
         }
     }
-
+    override fun onEnabled(context: Context?) {
+        super.onEnabled(context)
+        val watchGisWidget = ComponentName(context!!, Gismeteo::class.java)
+        CoroutineScope(Dispatchers.IO).launch {
+            updateGisViews(context) {
+                AppWidgetManager.getInstance(context).updateAppWidget(watchGisWidget, it)
+            }
+        }
+    }
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
         if (intent?.action == "update") {
             val watchYanWidget = ComponentName(context!!, Yandex::class.java)
             val watchGisWidget = ComponentName(context, Gismeteo::class.java)
             val watchHydWidget = ComponentName(context, Hydro::class.java)
-            CoroutineScope(Dispatchers.Default).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 updateGisViews(context) {
                     AppWidgetManager.getInstance(context).updateAppWidget(watchGisWidget, it)
                 }
             }
-            CoroutineScope(Dispatchers.Default).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 updateYanViews(context) {
                     AppWidgetManager.getInstance(context).updateAppWidget(watchYanWidget, it)
                 }
             }
-            CoroutineScope(Dispatchers.Default).launch {
+            CoroutineScope(Dispatchers.IO).launch {
                 updateHydViews(context) {
                     AppWidgetManager.getInstance(context).updateAppWidget(watchHydWidget, it)
                 }
@@ -82,7 +91,7 @@ suspend fun updateGisViews(context: Context?, function: (RemoteViews) -> Unit) {
     views.setTextViewText(R.id.gis_time, nowTime)
     val nowTimeInt = nowTime.rep
     val sunUp = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0)!!.rep
-    val sunDown = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 1)!!.rep
+    val sunDown = getOnSitesTemps(GIS_URL, GIS_SUN_DOWN, 0)!!.rep
     val value = getOnSitesTemps(GIS_URL, GIS_DIV_TAG, flag = 3)?.sA?.sB!!
     views.apply {
         setOnClickPendingIntent(R.id.image_now_gis,
