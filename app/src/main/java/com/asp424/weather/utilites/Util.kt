@@ -7,6 +7,9 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.util.Log
+import android.view.View
+import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import com.asp424.weather.R
 
@@ -181,4 +184,16 @@ fun getIconDayYan(value: String) = when (value) {
     "Облачно с прояснениями" -> R.drawable.gis_c
     "Малооблачно" -> R.drawable.gis_g
     else -> R.drawable.logo
+}
+fun setStateScreen(mainActivity: Context, screen: Int, name: String) {
+    val sharedPref = mainActivity.getSharedPreferences(name, 0x0000) ?: return
+    with(sharedPref.edit()) {
+        putInt(name, screen)
+        apply()
+    }
+}
+
+fun getStateScreen(mainActivity: Context, name: String): Int {
+    val sharedPref = mainActivity.getSharedPreferences(name, 0x0000)
+    return sharedPref.getInt(name, 0)
 }

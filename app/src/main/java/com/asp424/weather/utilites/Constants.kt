@@ -1,4 +1,8 @@
 package com.asp424.weather.utilites
+
+import android.widget.RemoteViews
+import com.asp424.weather.R
+
 //Change this URLs for get yours city weather info
 const val GIS_URL = "https://www.gismeteo.ru/weather-chelyabinsk-4565/now/"
 const val GIS_URL_TOD = "https://www.gismeteo.ru/weather-chelyabinsk-4565/"
@@ -26,4 +30,8 @@ const val YAN_TOD_DETAIL_TEMP = "weather-table__temp"
 const val YAN_TOD_DETAIL_RAIN = "weather-table__body-cell weather-table__body-cell_type_condition"
 const val YAN_RAIN = "link__condition"
 const val TAG = "td"
+val VIEWS_GIS = RemoteViews("com.asp424.weather", R.layout.gismeteo)
+val VIEWS_YAN = RemoteViews("com.asp424.weather", R.layout.yandex)
+val VIEWS_HYD = RemoteViews("com.asp424.weather", R.layout.hydro)
+
 
