@@ -1,5 +1,6 @@
 package com.asp424.weather.ui.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.DefaultLifecycleObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
@@ -20,11 +21,11 @@ class DetailGisViewModel @Inject constructor(private val repository: Repository)
 
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
-        getGisData()
+        getGisData(owner as Context)
     }
-    private fun getGisData() {
+    private fun getGisData(context: Context) {
         viewModelScope.launch {
-            repository.getGisData().collect {
+            repository.getGisData(context).collect {
                 _internetValues.value = it
             }
         }

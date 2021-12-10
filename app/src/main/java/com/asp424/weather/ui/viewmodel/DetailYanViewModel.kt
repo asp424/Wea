@@ -1,5 +1,6 @@
 package com.asp424.weather.ui.viewmodel
 
+import android.content.Context
 import androidx.lifecycle.*
 import com.asp424.weather.data.repository.Repository
 import com.asp424.weather.data.view_states.InternetResponse
@@ -15,11 +16,11 @@ class DetailYanViewModel @Inject constructor(private val repository: Repository)
         val internetValues = _internetValues.asStateFlow()
     override fun onResume(owner: LifecycleOwner) {
         super.onResume(owner)
-        getYanData()
+        getYanData(owner as Context)
     }
-        fun getYanData() {
+        private fun getYanData(context: Context) {
             viewModelScope.launch {
-                repository.getYanData().collect {
+                repository.getYanData(context).collect {
                     _internetValues.value = it
                 }
             }

@@ -1,6 +1,5 @@
 package com.asp424.weather.ui.widgets.gismeteo.cells
 
-import android.util.Log
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -8,16 +7,17 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberImagePainter
-import com.asp424.weather.ui.cells.Visibility
+import com.asp424.weather.utilites.getCity
 import com.asp424.weather.utilites.getIconDayGis
 import com.asp424.weather.utilites.getIconNightGis
 import com.asp424.weather.utilites.repPlus
@@ -29,9 +29,17 @@ fun CardDetailGis(
     image: String,
     item: String,
     indexes: IntRange,
-    hour: Int, onClick: (String) -> Unit) {
+    hour: Int, onClick: (String) -> Unit
+) {
     val min = "00"
-    val listHour = listOf("2", "5", "8", "11", "14", "17", "20", "23")
+    val list = listOf("0", "3", "6", "9", "12", "15", "18", "21")
+    val listHour = when (getCity(LocalContext.current)) {
+        "Челябинск" -> listOf("2", "5", "8", "11", "14", "17", "20", "23")
+        "Пушкин" -> list
+        "Москва" -> list
+        "Крымск" -> list
+        else -> list
+    }
     Card(
         modifier = Modifier
             .padding(3.dp)

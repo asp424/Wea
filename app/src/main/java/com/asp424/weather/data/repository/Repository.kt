@@ -1,5 +1,6 @@
 package com.asp424.weather.data.repository
 
+import android.content.Context
 import com.asp424.weather.data.internet.jsoup.JsoupSource
 import com.asp424.weather.data.internet.retrofit.RestSource
 import com.asp424.weather.data.view_states.InternetResponse
@@ -12,11 +13,11 @@ constructor(
     private val jsoupSource: JsoupSource,
     private val restSource: RestSource
 ) {
-    suspend fun getGisData(): Flow<InternetResponse> = flow {
-        emit(jsoupSource.getGisData())
+    suspend fun getGisData(context: Context): Flow<InternetResponse> = flow {
+        emit(jsoupSource.getGisData(context))
     }
 
-    suspend fun getYanData(): Flow<InternetResponse> = flow {
-        emit(jsoupSource.getYanData())
+    suspend fun getYanData(context: Context): Flow<InternetResponse> = flow {
+        emit(jsoupSource.getYanData(context))
     }
 }

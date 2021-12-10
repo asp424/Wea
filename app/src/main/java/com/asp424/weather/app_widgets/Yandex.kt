@@ -4,12 +4,10 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
-import android.widget.RemoteViews
 import com.asp424.weather.R
 import com.asp424.weather.activity.DetailYanActivity
 import com.asp424.weather.data.internet.jsoup.getOnSitesTemps
@@ -101,10 +99,13 @@ suspend fun updateYanViews(context: Context?, appWidgetManager: AppWidgetManager
         setViewVisibility(R.id.progress_yan, View.VISIBLE)
         appWidgetManager.updateAppWidget(getStateScreen(context!!, "yan"), this)
         val nowTime = SimpleDateFormat("H:mm").format(Calendar.getInstance().time)
-        val value = getOnSitesTemps(YAN_URL, YAN_RAIN, 0)!!
-        val nowTimeInt = nowTime.rep
-        val sunUp = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0)!!.rep
-        val sunDown = getOnSitesTemps(GIS_URL, GIS_SUN_DOWN, 0)!!.rep
+        val sunUpPrOne = getOnSitesTemps(checkedCityUrlGisNow(context), GIS_SUN_UP, 0)!!
+        val sunDownPrOne = getOnSitesTemps(checkedCityUrlGisNow(context), GIS_SUN_DOWN, 0)!!
+        val value = getOnSitesTemps(checkedCityUrlYanNow(context), YAN_RAIN, 0)!!
+        val sunUp = if (sunUpPrOne.isEmpty())
+            getOnSitesTemps(checkedCityUrlGisNow(context), GIS_SUN_UP1, 0)!!.rep else sunUpPrOne.rep
+        val sunDown = if (sunDownPrOne.isEmpty())
+            getOnSitesTemps(checkedCityUrlGisNow(context), GIS_SUN_DOWN1, 0)!!.rep else sunDownPrOne.rep
         setOnClickPendingIntent(
                 R.id.image_yan, getPendingSelfIntent(
                     context,
@@ -121,13 +122,13 @@ suspend fun updateYanViews(context: Context?, appWidgetManager: AppWidgetManager
             )
             setTextViewText(
                 R.id.yan_text, getOnSitesTemps(
-                    YAN_URL,
+                    checkedCityUrlYanNow(context),
                     YAN_TEMP, 1
                 )?.repPlus + " °C"
             )
             setTextViewText(R.id.yan_time, nowTime)
 
-        if (nowTimeInt in sunUp..sunDown || nowTimeInt in sunDown..sunUp
+        if (nowTime.rep in sunUp..sunDown || nowTime.rep in sunDown..sunUp
         ) {
             setViewVisibility(R.id.progress_yan, View.INVISIBLE)
           setImageViewResource(R.id.image_now_yan, getIconDayYan(value))

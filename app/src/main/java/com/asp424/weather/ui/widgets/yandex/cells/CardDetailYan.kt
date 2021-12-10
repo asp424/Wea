@@ -37,7 +37,7 @@ fun CardDetailYan(time: String, rain: String, index: Int, temp: String, onClick:
                     fontSize = 12.sp, modifier = Modifier.padding(top = 2.dp))
             Image(
                 painter = rememberImagePainter(
-                    if (index == 0 || index == 1) getIconDayYan(rain)
+                    if (index == 1) getIconDayYan(rain)
                     else getIconNightYan(rain)),
                 contentDescription = null,
                 modifier = Modifier.size(38.dp)
