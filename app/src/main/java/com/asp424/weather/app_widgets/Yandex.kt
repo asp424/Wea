@@ -101,10 +101,13 @@ suspend fun updateYanViews(context: Context?, appWidgetManager: AppWidgetManager
         setViewVisibility(R.id.progress_yan, View.VISIBLE)
         appWidgetManager.updateAppWidget(getStateScreen(context!!, "yan"), this)
         val nowTime = SimpleDateFormat("H:mm").format(Calendar.getInstance().time)
+        val sunUpPrOne = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0)!!
+        val sunDownPrOne = getOnSitesTemps(GIS_URL, GIS_SUN_DOWN, 0)!!
         val value = getOnSitesTemps(YAN_URL, YAN_RAIN, 0)!!
-        val nowTimeInt = nowTime.rep
-        val sunUp = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0)!!.rep
-        val sunDown = getOnSitesTemps(GIS_URL, GIS_SUN_DOWN, 0)!!.rep
+        val sunUp = if (sunUpPrOne.isEmpty())
+            getOnSitesTemps(GIS_URL, GIS_SUN_UP1, 0)!!.rep else sunUpPrOne.rep
+        val sunDown = if (sunDownPrOne.isEmpty())
+            getOnSitesTemps(GIS_URL, GIS_SUN_DOWN1, 0)!!.rep else sunDownPrOne.rep
         setOnClickPendingIntent(
                 R.id.image_yan, getPendingSelfIntent(
                     context,
@@ -127,7 +130,7 @@ suspend fun updateYanViews(context: Context?, appWidgetManager: AppWidgetManager
             )
             setTextViewText(R.id.yan_time, nowTime)
 
-        if (nowTimeInt in sunUp..sunDown || nowTimeInt in sunDown..sunUp
+        if (nowTime.rep in sunUp..sunDown || nowTime.rep in sunDown..sunUp
         ) {
             setViewVisibility(R.id.progress_yan, View.INVISIBLE)
           setImageViewResource(R.id.image_now_yan, getIconDayYan(value))

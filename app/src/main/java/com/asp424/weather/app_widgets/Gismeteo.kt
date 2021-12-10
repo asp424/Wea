@@ -4,7 +4,6 @@ import android.annotation.SuppressLint
 import android.app.PendingIntent
 import android.appwidget.AppWidgetManager
 import android.appwidget.AppWidgetProvider
-import android.content.ComponentName
 import android.content.Context
 import android.content.Intent
 import android.util.Log
@@ -38,14 +37,17 @@ class Gismeteo : AppWidgetProvider() {
             }
         }
     }
+
     override fun onEnabled(context: Context?) {
         super.onEnabled(context)
         CoroutineScope(Dispatchers.IO).launch {
             updateGisViews(context, AppWidgetManager.getInstance(context)) {
-                AppWidgetManager.getInstance(context).updateAppWidget(getStateScreen(context!!, "gis"), VIEWS_GIS)
+                AppWidgetManager.getInstance(context)
+                    .updateAppWidget(getStateScreen(context!!, "gis"), VIEWS_GIS)
             }
         }
     }
+
     override fun onReceive(context: Context?, intent: Intent?) {
         super.onReceive(context, intent)
         if (intent?.action == "update") {
@@ -83,22 +85,30 @@ internal suspend fun updateGisAppWidget(
 
 
 @SuppressLint("SimpleDateFormat", "UnspecifiedImmutableFlag")
-suspend fun updateGisViews(context: Context?, appWidgetManager: AppWidgetManager, function: () -> Unit) {
+suspend fun updateGisViews(
+    context: Context?,
+    appWidgetManager: AppWidgetManager,
+    function: () -> Unit
+) {
     VIEWS_GIS.apply {
-    setViewVisibility(R.id.progress_gis, View.VISIBLE)
+        setViewVisibility(R.id.progress_gis, View.VISIBLE)
         appWidgetManager.updateAppWidget(getStateScreen(context!!, "gis"), this)
-    val nowTime = SimpleDateFormat("H:mm").format(Calendar.getInstance().time)
-    val nowTimeInt = nowTime.rep
-    val sunUp = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0)!!.rep
-    val sunDown = getOnSitesTemps(GIS_URL, GIS_SUN_DOWN, 0)!!.rep
-    val value = getOnSitesTemps(GIS_URL, GIS_DIV_TAG, flag = 3)?.sA?.sB!!
+        val nowTime = SimpleDateFormat("H:mm").format(Calendar.getInstance().time)
+        val sunUpPrOne = getOnSitesTemps(GIS_URL, GIS_SUN_UP, 0)!!
+        val sunDownPrOne = getOnSitesTemps(GIS_URL, GIS_SUN_DOWN, 0)!!
+        val sunUp = if (sunUpPrOne.isEmpty())
+            getOnSitesTemps(GIS_URL, GIS_SUN_UP1, 0)!!.rep else sunUpPrOne.rep
+        val sunDown = if (sunDownPrOne.isEmpty())
+            getOnSitesTemps(GIS_URL, GIS_SUN_DOWN1, 0)!!.rep else sunDownPrOne.rep
+        val value = getOnSitesTemps(GIS_URL, GIS_DIV_TAG, flag = 3)?.sA?.sB!!
         setTextViewText(R.id.gis_time, nowTime)
         setOnClickPendingIntent(
             R.id.image_now_gis,
             PendingIntent.getActivity(
                 context, 0,
                 Intent(context, DetailGisActivity::class.java)
-                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK), 0
+            )
         )
         setOnClickPendingIntent(
             R.id.image_gis,
@@ -106,7 +116,7 @@ suspend fun updateGisViews(context: Context?, appWidgetManager: AppWidgetManager
         )
         setTextViewText(R.id.gis_text, getOnSitesTemps(GIS_URL_TOD, GIS_TEMP_TOD)?.repPlus + " °C")
 
-        if (nowTimeInt in sunUp..sunDown || nowTimeInt in sunDown..sunUp
+        if (nowTime.rep in sunUp..sunDown || nowTime.rep in sunDown..sunUp
         ) {
             setImageViewResource(R.id.image_now_gis, getIconDayGis(value))
             setViewVisibility(R.id.progress_gis, View.GONE)

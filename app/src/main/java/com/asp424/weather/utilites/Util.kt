@@ -51,7 +51,7 @@ val String.sA: String
 val String.sB: String
     get() = this.substringBefore("\">")
 val String.rep: Int
-    get() = this.filter { it.isDigit() }.toInt()
+    get() = if (this.isNotEmpty()) this.filter { it.isDigit() }.toInt() else 0
 val String.repPlus: String
     get() = this.replace(",", ".").replace("+", "")
 fun MutableList<String>.addItem(value: String) = run {
@@ -83,6 +83,7 @@ fun MutableList<String>.addToList(value: String){
     this.add(item)
 }
 fun getIconDayGis(value: String) = when (value) {
+    "Облачно, ливневый снег" -> R.drawable.gis_s
     "Пасмурно, небольшой снег с&nbsp;дождём" -> R.drawable.gis_u
     "Пасмурно, ливневый дождь" -> R.drawable.gis_l
     "Пасмурно, небольшой замерзающий дождь, гололед" -> R.drawable.gis_u
@@ -119,10 +120,13 @@ fun getIconDayGis(value: String) = when (value) {
     "Малооблачно, небольшие осадки" -> R.drawable.gis_v
     "Пасмурно, ливневый снег" -> R.drawable.gis_h
     "Малооблачно, ливневый дождь" -> R.drawable.gis_r
+    "Пасмурно, осадки" -> R.drawable.gis_e
     else -> R.drawable.logo
 }
 
 fun getIconNightGis(value: String) = when (value) {
+    "Облачно, ливневый снег" -> R.drawable.gis_s_n
+    "Пасмурно, осадки" -> R.drawable.gis_e
     "Пасмурно, небольшой снег с&nbsp;дождём" -> R.drawable.gis_u
     "Малооблачно, ливневый дождь" -> R.drawable.gis_e_n
     "Пасмурно, ливневый дождь" -> R.drawable.gis_l

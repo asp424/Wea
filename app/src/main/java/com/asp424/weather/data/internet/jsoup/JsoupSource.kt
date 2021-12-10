@@ -14,15 +14,23 @@ class JsoupSource {
     suspend fun getGisData(): InternetResponse =
         suspendCoroutine { continuation ->
             CoroutineScope(Dispatchers.IO).launch {
+                val listIcon = getOnSitesTemps(GIS_URL_TOD, GIS_ICON_LIST, 0, 5)
+                val sunUp = getOnSitesTemps(GIS_URL, GIS_SUN_UP)
+                val sunDown = getOnSitesTemps(GIS_URL, GIS_SUN_DOWN)
                 continuation.resume(
                     InternetResponse.OnSuccess(
                         JSONObject()
-                            .put("gis_temp_tod", getOnSitesTemps(GIS_URL_TOD, GIS_TEMP_TOD, 0, 4))
-                            .put("gis_icon_tod", getOnSitesTemps(GIS_URL_TOD, GIS_ICON_LIST, 0, 5))
-                            .put("gis_temp_tom", getOnSitesTemps(GIS_URL_TOM, GIS_TEMP_TOD, 0, 4))
-                            .put("gis_icon_tom", getOnSitesTemps(GIS_URL_TOM, GIS_ICON_LIST, 0, 5))
-                            .put("gis_sun_up", getOnSitesTemps(GIS_URL, GIS_SUN_UP))
-                            .put("gis_sun_down", getOnSitesTemps(GIS_URL, GIS_SUN_DOWN)
+                            .put("gis_temp", getOnSitesTemps(GIS_URL_TOD, GIS_TEMP_TOD,
+                                0, 4))
+                            .put("gis_icon", if (listIcon!!.isEmpty())
+                                getOnSitesTemps(GIS_URL_TOD, GIS_ICON_LIST1,
+                                    0, 5) else listIcon)
+                            .put("gis_sun_up", if (sunUp!!.isEmpty())
+                                getOnSitesTemps(GIS_URL, GIS_SUN_UP1)
+                            else sunUp)
+                            .put("gis_sun_down", if (sunDown!!.isEmpty())
+                                getOnSitesTemps(GIS_URL, GIS_SUN_DOWN1)
+                            else sunDown
                     )
                 )
                 )
