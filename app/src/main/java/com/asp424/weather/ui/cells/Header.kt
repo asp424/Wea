@@ -7,6 +7,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -20,7 +21,8 @@ fun Header(
     color: Color = Color.White,
     paddingEnd: Dp = 0.dp, paddingTop: Dp = 6.dp,
     paddingStart: Dp = 0.dp, paddingBottom: Dp = 0.dp,
-    backGroundColor: Color = Color.Transparent
+    backGroundColor: Color = Color.Transparent,
+    rotation: Float = 1f
 ) {
     Text(
         text = string,
@@ -38,6 +40,8 @@ fun Header(
             bottom = paddingBottom,
             start = paddingStart,
             end = paddingEnd
-        )
+        ).graphicsLayer {
+            rotationX = rotation
+        }
     )
 }

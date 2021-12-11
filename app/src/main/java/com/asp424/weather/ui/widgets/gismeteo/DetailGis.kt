@@ -18,18 +18,20 @@ import com.asp424.weather.utilites.addToList
 @Composable
 fun DetailGis(viewModel: DetailGisViewModel) {
     val values by remember(viewModel) { viewModel.internetValues }.collectAsState()
-    val listTemp = remember { mutableListOf<String>() }
-
+    val listTod = remember { mutableListOf<String>() }
+    val listTom = remember { mutableListOf<String>() }
     val context = LocalContext.current as DetailGisActivity
     val lifeCycle = LocalLifecycleOwner.current.lifecycle
     when (values) {
         is InternetResponse.OnSuccess -> {
             DetailCard {
                 (values as InternetResponse.OnSuccess).dataValues.apply {
-                    listTemp.addToList(getString("gis_temp"))
+                    listTod.addToList(getString("gis_temp_tod"))
+                    listTom.addToList(getString("gis_temp_tom"))
                     ColumnDetail(
-                        listTemp,
-                        mutableListOf<String>().addItem(getString("gis_icon"))
+                        listTod, listTom,
+                        mutableListOf<String>().addItem(getString("gis_icon_tod")),
+                        mutableListOf<String>().addItem(getString("gis_icon_tom"))
                     )
                 }
             }

@@ -114,7 +114,8 @@ suspend fun updateGisViews(
             R.id.image_gis,
             getPendingSelfIntent(context, "update", Gismeteo::class.java)
         )
-        setTextViewText(R.id.gis_text, getOnSitesTemps(checkedCityUrlGisTod(context), GIS_TEMP_TOD)?.repPlus + " °C")
+        setTextViewText(R.id.gis_text, getOnSitesTemps(checkedCityUrlGisTod(context),
+            GIS_TEMP_TOD)?.repPlus + " °C")
 
         if (nowTime.rep in sunUp..sunDown || nowTime.rep in sunDown..sunUp
         ) {

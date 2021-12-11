@@ -23,23 +23,25 @@ import com.asp424.weather.ui.cells.Visibility
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun ColumnDetail(
-    listTemp: MutableList<String>,
-    listIcon: MutableList<String>
+    listTod: MutableList<String>,
+    listTom: MutableList<String>,
+    listSkyTod: MutableList<String>,
+    listSkyTom: MutableList<String>
 ) {
     var about by remember { mutableStateOf("") }
     var visible by remember { mutableStateOf(false) }
     Column {
         ColumnDetailCellGis(header = "Сегодня", inRow1 = {
-            listTemp.takeLast(8).take(4).forEachIndexed { i, item ->
-                CardDetailGis(i, listIcon[i], item, 0..2, i){
+            listTod.takeLast(8).take(4).forEachIndexed { i, item ->
+                CardDetailGis(i, listSkyTod[i], item, 0..2, i){
                     about = it.replace("&nbsp;", " ")
                     visible = true
                 }
             }
         }) {
-            listTemp.takeLast(4).forEachIndexed { i, item ->
+            listTod.takeLast(4).forEachIndexed { i, item ->
                 CardDetailGis(
-                    i, listIcon[4 + i], item, 2..3, 4 + i
+                    i, listSkyTod[4 + i], item, 2..3, 4 + i
                 ){
                     about = it.replace("&nbsp;", " ")
                     visible = true
@@ -47,15 +49,15 @@ fun ColumnDetail(
             }
         }
         ColumnDetailCellGis(header = "Завтра", inRow1 = {
-            listTemp.takeLast(8).take(4).forEachIndexed { i, item ->
-                CardDetailGis(i, listIcon[i], item, 0..2, i){
+            listTom.takeLast(8).take(4).forEachIndexed { i, item ->
+                CardDetailGis(i, listSkyTom[i], item, 0..2, i){
                     about = it.replace("&nbsp;", " ")
                     visible = true
                 }
             }
         }, inRow2 = {
-            listTemp.takeLast(4).forEachIndexed { i, item ->
-                CardDetailGis(i, listIcon[4 + i], item, 2..3, 4 + i){
+            listTom.takeLast(4).forEachIndexed { i, item ->
+                CardDetailGis(i, listSkyTom[4 + i], item, 2..3, 4 + i){
                     about = it.replace("&nbsp;", " ")
                     visible = true
                 }
