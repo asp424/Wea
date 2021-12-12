@@ -7,9 +7,6 @@ import android.content.Intent
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.util.Log
-import android.view.View
-import android.widget.RemoteViews
 import androidx.annotation.RequiresApi
 import com.asp424.weather.R
 
@@ -83,6 +80,7 @@ fun MutableList<String>.addToList(value: String){
     this.add(item)
 }
 fun getIconDayGis(value: String) = when (value) {
+    "Пасмурно, снежные зёрна" -> R.drawable.gis_h
     "Пасмурно, дымка" -> R.drawable.gis_i
     "Пасмурно, небольшой мокрый снег" -> R.drawable.gis_u
     "Пасмурно, сильный снег" -> R.drawable.gis_w
@@ -130,7 +128,8 @@ fun getIconDayGis(value: String) = when (value) {
 }
 
 fun getIconNightGis(value: String) = when (value) {
-    "Пасмурно, дымка" -> R.drawable.gis_i
+    "Пасмурно, снежные зёрна" -> R.drawable.gis_h
+        "Пасмурно, дымка" -> R.drawable.gis_i
     "Пасмурно, небольшой мокрый снег" -> R.drawable.gis_u
     "Пасмурно, небольшой снег с дождём" -> R.drawable.gis_u
     "Пасмурно, сильный снег" -> R.drawable.gis_w
