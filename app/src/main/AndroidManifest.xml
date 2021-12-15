@@ -45,7 +45,6 @@
                 android:name="android.appwidget.provider"
                 android:resource="@xml/yandex_info" />
         </receiver>
-
         <activity
             android:name="com.asp424.weather.activity.MainActivity"
             android:exported="true"
