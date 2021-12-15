@@ -25,6 +25,7 @@ import com.asp424.weather.utilites.repPlus
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun CardDetailGis(
+    color: Color,
     i: Int,
     image: String,
     item: String,
@@ -46,7 +47,7 @@ fun CardDetailGis(
             .clickable {
                 onClick(image)
             },
-        border = BorderStroke(1.dp, Color.Black)
+        border = BorderStroke(1.dp, Color.Black), backgroundColor = color
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,

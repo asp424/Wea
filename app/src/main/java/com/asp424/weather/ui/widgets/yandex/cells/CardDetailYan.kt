@@ -10,6 +10,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Color.Companion.White
+import androidx.compose.ui.graphics.colorspace.WhitePoint
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
@@ -19,12 +21,18 @@ import com.asp424.weather.utilites.getIconDayYan
 import com.asp424.weather.utilites.getIconNightYan
 
 @Composable
-fun CardDetailYan(time: String, rain: String, index: Int, temp: String, onClick: (String) -> Unit){
+fun CardDetailYan(
+    color: Color,
+    time: String,
+    rain: String,
+    index: Int,
+    temp: String,
+    onClick: (String) -> Unit){
     Card(
         modifier = Modifier.padding(3.dp).clickable {
             onClick(rain)
         },
-        border = BorderStroke(1.dp, Color.Black)
+        border = BorderStroke(1.dp, Color.Black), backgroundColor = color
     ) {
         Column(
             horizontalAlignment = Alignment.CenterHorizontally,
