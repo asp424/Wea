@@ -51,6 +51,7 @@ val String.rep: Int
     get() = if (this.isNotEmpty()) this.filter { it.isDigit() }.toInt() else 0
 val String.repPlus: String
     get() = this.replace(",", ".").replace("+", "")
+
 fun MutableList<String>.addItem(value: String) = run {
     this.apply {
         value.apply {
@@ -66,7 +67,7 @@ fun MutableList<String>.addItem(value: String) = run {
     }
 }
 
-fun MutableList<String>.addToList(value: String){
+fun MutableList<String>.addToList(value: String) {
     var item = ""
     value.forEach {
         if (it.toString() != " ")
@@ -79,7 +80,10 @@ fun MutableList<String>.addToList(value: String){
     Thread.sleep(300L)
     this.add(item)
 }
+
 fun getIconDayGis(value: String) = when (value) {
+    "Пасмурно, небольшие осадки" -> R.drawable.gis_u
+    "Облачно, небольшой снег" -> R.drawable.gis_d
     "Пасмурно, снежные зёрна" -> R.drawable.gis_h
     "Пасмурно, дымка" -> R.drawable.gis_i
     "Пасмурно, небольшой мокрый снег" -> R.drawable.gis_u
@@ -130,8 +134,10 @@ fun getIconDayGis(value: String) = when (value) {
 }
 
 fun getIconNightGis(value: String) = when (value) {
+    "Пасмурно, небольшие осадки" -> R.drawable.gis_u
+    "Облачно, небольшой снег" -> R.drawable.gis_j_n
     "Пасмурно, снежные зёрна" -> R.drawable.gis_h
-        "Пасмурно, дымка" -> R.drawable.gis_i
+    "Пасмурно, дымка" -> R.drawable.gis_i
     "Пасмурно, небольшой мокрый снег" -> R.drawable.gis_u
     "Пасмурно, небольшой снег с дождём" -> R.drawable.gis_u
     "Пасмурно, сильный снег" -> R.drawable.gis_w
@@ -207,6 +213,7 @@ fun getIconDayYan(value: String) = when (value) {
     "Малооблачно" -> R.drawable.gis_g
     else -> R.drawable.logo
 }
+
 fun setStateScreen(mainActivity: Context, screen: Int, name: String) {
     val sharedPref = mainActivity.getSharedPreferences(name, 0x0000) ?: return
     with(sharedPref.edit()) {
@@ -233,15 +240,15 @@ fun getCity(mainActivity: Context): String? {
     return sharedPref.getString("value", "Крымск")
 }
 
-fun checkedCityUrlGisNow(context: Context) = when(getCity(context)){
-        "Челябинск" -> GIS_URL_CHEL
-        "Пушкин" -> GIS_URL_PUSH
-        "Москва" -> GIS_URL_MOSC
-        "Крымск" -> GIS_URL_KRYM
-        else -> GIS_URL_KRYM
-    }
+fun checkedCityUrlGisNow(context: Context) = when (getCity(context)) {
+    "Челябинск" -> GIS_URL_CHEL
+    "Пушкин" -> GIS_URL_PUSH
+    "Москва" -> GIS_URL_MOSC
+    "Крымск" -> GIS_URL_KRYM
+    else -> GIS_URL_KRYM
+}
 
-fun checkedCityUrlGisTod(context: Context) = when(getCity(context)){
+fun checkedCityUrlGisTod(context: Context) = when (getCity(context)) {
     "Челябинск" -> GIS_URL_CHEL_TOD
     "Пушкин" -> GIS_URL_PUSH_TOD
     "Москва" -> GIS_URL_MOSC_TOD
@@ -249,7 +256,7 @@ fun checkedCityUrlGisTod(context: Context) = when(getCity(context)){
     else -> GIS_URL_KRYM_TOD
 }
 
-fun checkedCityUrlGisTom(context: Context) = when(getCity(context)){
+fun checkedCityUrlGisTom(context: Context) = when (getCity(context)) {
     "Челябинск" -> GIS_URL_CHEL_TOM
     "Пушкин" -> GIS_URL_PUSH_TOM
     "Москва" -> GIS_URL_MOSC_TOM
@@ -257,7 +264,7 @@ fun checkedCityUrlGisTom(context: Context) = when(getCity(context)){
     else -> GIS_URL_KRYM_TOM
 }
 
-fun checkedCityUrlYanNow(context: Context) = when(getCity(context)){
+fun checkedCityUrlYanNow(context: Context) = when (getCity(context)) {
     "Челябинск" -> YAN_URL_CHEL
     "Пушкин" -> YAN_URL_PUSH
     "Москва" -> YAN_URL_MOSC
@@ -265,7 +272,7 @@ fun checkedCityUrlYanNow(context: Context) = when(getCity(context)){
     else -> YAN_URL_KRYM
 }
 
-fun checkedCityUrlYanDet(context: Context) = when(getCity(context)){
+fun checkedCityUrlYanDet(context: Context) = when (getCity(context)) {
     "Челябинск" -> YAN_URL_CHEL_DETAILS
     "Пушкин" -> YAN_URL_PUSH_DETAILS
     "Москва" -> YAN_URL_MOSC_DETAILS

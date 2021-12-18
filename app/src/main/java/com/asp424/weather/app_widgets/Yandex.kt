@@ -56,11 +56,6 @@ class Yandex : AppWidgetProvider() {
                         .updateAppWidget(getStateScreen(context!!, "yan"), VIEWS_YAN)
                 }
             }
-            CoroutineScope(Dispatchers.IO).launch {
-                updateHydViews(context, appWidgetManager) {
-                    appWidgetManager.updateAppWidget(getStateScreen(context!!, "hyd"), VIEWS_HYD)
-                }
-            }
         }
     }
 

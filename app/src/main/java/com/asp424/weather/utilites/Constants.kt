@@ -55,6 +55,6 @@ const val YAN_RAIN = "link__condition"
 const val TAG = "td"
 val VIEWS_GIS = RemoteViews("com.asp424.weather", R.layout.gismeteo)
 val VIEWS_YAN = RemoteViews("com.asp424.weather", R.layout.yandex)
-val VIEWS_HYD = RemoteViews("com.asp424.weather", R.layout.hydro)
+
 
 
